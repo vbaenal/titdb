@@ -8,6 +8,7 @@ description = "A simple library to make use of the Trails in the Database API"
 readme = "README.md"
 license = "MIT"
 categories = ["web-programming", "api-bindings", "asynchronous"]
+repository = "https://github.com/vbaenal/titdb"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

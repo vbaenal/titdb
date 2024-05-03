@@ -64,14 +64,20 @@ async fn get_chr_detail_stat_test_data() {
 
 #[tokio::test]
 async fn get_script_search_stat_test_none() {
-    let test: Result<Vec<Stat>, reqwest::Error> = get_script_search_stat(None, None, None, None).await;
+    let test: Result<Vec<Stat>, reqwest::Error> =
+        get_script_search_stat(None, None, None, None).await;
     assert!(test.is_ok())
 }
 
 #[tokio::test]
 async fn get_script_search_stat_test_data() {
-    let test: Result<Vec<Stat>, reqwest::Error> =
-        get_script_search_stat(Some("Why is my present a boy?"), Some(1), Some(false), Some(vec!["Estelle"])).await;
+    let test: Result<Vec<Stat>, reqwest::Error> = get_script_search_stat(
+        Some("Why is my present a boy?"),
+        Some(1),
+        Some(false),
+        Some(vec!["Estelle"]),
+    )
+    .await;
     assert!(test.is_ok())
 }
 
@@ -90,7 +96,7 @@ async fn get_script_search_test_data() {
         Some(false),
         Some(1),
         Some(1),
-        Some(vec!["Estelle"])
+        Some(vec!["Estelle"]),
     )
     .await;
     assert!(test.is_ok())

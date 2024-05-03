@@ -1,0 +1,24 @@
+[package]
+name = "titdb"
+version = "0.1.0"
+edition = "2021"
+authors = ["Víctor Baena <vicbaeluq@gmail.com>"]
+
+description = "A simple library to make use of the Trails in the Database API"
+readme = "README.md"
+license = "MIT"
+categories = ["web-programming", "api-bindings", "asynchronous"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+reqwest = { version = "0.12", features = ["json"] }
+serde = { version = "1", features = ["derive"] }
+rand = { version = "0.8", optional = true }
+
+[dev-dependencies]
+tokio = { version = "1", features = ["macros"] }
+
+[features]
+default = []
+rand = ["dep:rand"]

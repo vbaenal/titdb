@@ -133,18 +133,18 @@ pub async fn get_chr(character: Option<&str>) -> Result<Vec<Character>> {
 
 pub async fn get_chr_detail(
     game_id: Option<u8>,
-    ascendent: Option<bool>,
+    asc: Option<bool>,
     sort: Option<Sort>,
     page_number: Option<u32>,
     page_size: Option<u32>,
 ) -> Result<Vec<Character>> {
-    let gid: String = option_to_string(game_id);
-    let asc = ascendent.unwrap_or(false);
-    let s: String = sort.unwrap_or(Sort::Rows).to_string();
-    let pn: String = option_to_string(page_number);
-    let ps: String = option_to_string(page_size);
+    let game_id: String = option_to_string(game_id);
+    let asc = asc.unwrap_or(false);
+    let sort: String = sort.unwrap_or(Sort::Rows).to_string();
+    let page_number: String = option_to_string(page_number);
+    let page_size: String = option_to_string(page_size);
 
-    let url = format!("{BASE_URL}{API_URL}/chr/detail?game_id={gid}&asc={asc}&sort={s}&page_numer={pn}&page_size={ps}");
+    let url = format!("{BASE_URL}{API_URL}/chr/detail?game_id={game_id}&asc={asc}&sort={sort}&page_numer={page_number}&page_size={page_size}");
     let response = reqwest::get(&url).await?;
 
     let characters: Vec<Character> = response.json().await?;
@@ -152,8 +152,8 @@ pub async fn get_chr_detail(
 }
 
 pub async fn get_chr_detail_stat(game_id: Option<u8>) -> Result<Stat> {
-    let gid: String = option_to_string(game_id);
-    let url = format!("{BASE_URL}{API_URL}/chr/detail/stat?game_id={gid}");
+    let game_id: String = option_to_string(game_id);
+    let url = format!("{BASE_URL}{API_URL}/chr/detail/stat?game_id={game_id}");
     let response = reqwest::get(&url).await?;
 
     let stat: Stat = response.json().await?;
@@ -161,17 +161,17 @@ pub async fn get_chr_detail_stat(game_id: Option<u8>) -> Result<Stat> {
 }
 
 pub async fn get_script_search_stat(
-    quote: Option<&str>,
+    q: Option<&str>,
     game_id: Option<u8>,
     strict_search: Option<bool>,
-    characters: Option<Vec<&str>>,
+    chr: Option<Vec<&str>>,
 ) -> Result<Vec<Stat>> {
-    let q: &str = quote.unwrap_or_default();
-    let gid: String = option_to_string(game_id);
-    let strict: bool = strict_search.unwrap_or(false);
-    let chr: String = option_vec_to_request_string(characters);
+    let q: &str = q.unwrap_or_default();
+    let game_id: String = option_to_string(game_id);
+    let strict_search: bool = strict_search.unwrap_or(false);
+    let chr: String = option_vec_to_request_string(chr);
     let url = format!(
-        "{BASE_URL}{API_URL}/script/search/stat?q=\"{q}\"&game_id={gid}&strict_search={strict}{chr}"
+        "{BASE_URL}{API_URL}/script/search/stat?q=\"{q}\"&game_id={game_id}&strict_search={strict_search}{chr}"
     );
     let response = reqwest::get(&url).await?;
 
@@ -180,21 +180,21 @@ pub async fn get_script_search_stat(
 }
 
 pub async fn get_script_search(
-    quote: Option<&str>,
+    q: Option<&str>,
     game_id: Option<u8>,
     strict_search: Option<bool>,
     page_number: Option<u32>,
     page_size: Option<u32>,
-    characters: Option<Vec<&str>>,
+    chr: Option<Vec<&str>>,
 ) -> Result<Vec<Script>> {
-    let q: &str = quote.unwrap_or_default();
-    let gid: String = option_to_string(game_id);
-    let strict: bool = strict_search.unwrap_or(false);
-    let pn: String = option_to_string(page_number);
-    let ps: String = option_to_string(page_size);
-    let chr: String = option_vec_to_request_string(characters);
+    let q: &str = q.unwrap_or_default();
+    let game_id: String = option_to_string(game_id);
+    let strict_search: bool = strict_search.unwrap_or(false);
+    let page_size: String = option_to_string(page_size);
+    let page_number: String = option_to_string(page_number);
+    let chr: String = option_vec_to_request_string(chr);
 
-    let url = format!("{BASE_URL}{API_URL}/script/search?q=\"{q}\"&game_id={gid}&strict_search={strict}&page_number={pn}&page_size={ps}{chr}");
+    let url = format!("{BASE_URL}{API_URL}/script/search?q=\"{q}\"&game_id={game_id}&strict_search={strict_search}&page_number={page_number}&page_size={page_size}{chr}");
     let response = reqwest::get(&url).await?;
 
     let scripts: Vec<Script> = response.json().await?;
